@@ -22,19 +22,12 @@ import de.check.check_android.pages.home.domain.HomeEvent
 import de.check.database.tables.Pool
 
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun HomeScreen(
     state: HomeState,
     onEvent: (HomeEvent) -> Unit
 ) {
-    val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenWidthDp.dp
-
-    val sheetHeight = screenHeight * 0.7f
-    val sheetState = rememberModalBottomSheetState()
-
-
     Scaffold (
         floatingActionButton = { OpenSheetAddPool { onEvent(HomeEvent.OpenSheetAddPool) } },
         topBar = { DefaultAppBar() }
@@ -53,20 +46,13 @@ fun HomeScreen(
         }
 
         if (state.isAddingNewPool) {
-            ModalBottomSheet(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(sheetHeight),
+            AddPoolBottomSheet(
+                state = state,
                 onDismissRequest = { onEvent(HomeEvent.CloseSheetAddPool) },
-                sheetState = sheetState,
-                dragHandle = { BottomSheetDefaults.DragHandle() },
-            ) {
-                AddPoolBottomSheet(
-                    state = state,
-                    onValueChange = { title -> onEvent(HomeEvent.SetNewPoolTitle(title)) },
-                    onSubmit = { onEvent(HomeEvent.AddNewPool) }
-                )
-            }
+                onValueChange = { title -> onEvent(HomeEvent.SetNewPoolTitle(title)) },
+                onSubmit = { onEvent(HomeEvent.AddNewPool) },
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }

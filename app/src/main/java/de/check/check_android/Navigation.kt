@@ -14,7 +14,6 @@ import de.check.check_android.pages.home.presentation.HomeScreenViewModel
 
 @Composable
 fun Navigation() {
-
     val homeViewModel: HomeScreenViewModel = viewModel<HomeScreenViewModel>()
     val homeState: HomeState by homeViewModel.state.collectAsState()
 
@@ -24,15 +23,11 @@ fun Navigation() {
         navController = navController,
         startDestination = HomeScreen
     ) {
-
         composable<HomeScreen> {
             HomeScreen(
                 onEvent = homeViewModel::onEvent,
                 state = homeState
             )
         }
-
-
     }
-
 }
