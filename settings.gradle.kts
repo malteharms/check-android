@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "check-android"
 include(":app")
+include(":database")
+include(":core")

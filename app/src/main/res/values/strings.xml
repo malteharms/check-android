@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">check-android</string>
+    <string name="app_name">Check</string>
+    <string name="create_pool">Create Pool</string>
 </resources>
