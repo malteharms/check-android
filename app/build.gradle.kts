@@ -22,11 +22,28 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            /*
+             * Checklist https://developer.android.com/studio/publish
+             * [ ] Apps version information
+             * [x] isDebuggable = false
+             * [ ] logging disabled
+             * [ ] sign release version
+             * [ ] run automated tests
+             * [ ]
+             */
+
+            isMinifyEnabled = true
+            isDebuggable = false
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
         }
     }
     compileOptions {
