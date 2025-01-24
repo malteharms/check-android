@@ -46,10 +46,11 @@ class HomeScreenViewModel(
 
                 Log.d(TAG, "Adding new pool ${newPool.title} to database")
                 viewModelScope.launch {
-                    dao.insertPool(newPool)         // Database update
+                    dao.insertPool(newPool)
                     _state.update { it.copy(
-                        pools = dao.getPools(),     // Update pools
-                        newPoolTitle = ""           // Reset title
+                        pools = dao.getPools(),
+                        isAddingNewPool = false,
+                        newPoolTitle = ""
                     ) }
                 }
             }
