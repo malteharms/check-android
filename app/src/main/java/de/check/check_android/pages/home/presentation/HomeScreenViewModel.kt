@@ -84,7 +84,6 @@ class HomeScreenViewModel(
             is HomeEvent.SetNewPoolTitle -> {
                 _state.update { it.copy(
                     newPoolTitle = event.title
-
                 ) }
             }
 

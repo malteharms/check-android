@@ -29,9 +29,9 @@ fun HomeScreen(
         FlowRow(
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = 30.dp)
                 .fillMaxSize(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             state.pools.forEach { pool: Pool ->
