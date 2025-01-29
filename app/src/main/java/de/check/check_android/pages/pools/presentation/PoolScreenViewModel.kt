@@ -1,11 +1,11 @@
-package de.check.check_android.pages.home.presentation
+package de.check.check_android.pages.pools.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.check.check_android.CheckApp
-import de.check.check_android.pages.home.data.PoolState
-import de.check.check_android.pages.home.domain.PoolEvent
+import de.check.check_android.pages.pools.data.PoolState
+import de.check.check_android.pages.pools.domain.PoolEvent
 import de.check.core.getTimestampFromDate
 import de.check.database.CheckDao
 import de.check.database.tables.Pool
@@ -16,12 +16,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-class HomeScreenViewModel(
+class PoolScreenViewModel(
     private val dao: CheckDao = CheckApp.appModule.db.getDao()
 ): ViewModel() {
 
     companion object {
-        private val TAG: String? = HomeScreenViewModel::class.simpleName
+        private val TAG: String? = PoolScreenViewModel::class.simpleName
     }
 
     private val _state = MutableStateFlow(

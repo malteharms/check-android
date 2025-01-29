@@ -10,9 +10,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import de.check.check_android.pages.home.data.PoolState
-import de.check.check_android.pages.home.presentation.HomeScreen
-import de.check.check_android.pages.home.presentation.HomeScreenViewModel
+import de.check.check_android.pages.pools.data.PoolState
+import de.check.check_android.pages.pools.presentation.HomeScreen
+import de.check.check_android.pages.pools.presentation.PoolScreenViewModel
 import de.check.check_android.ui.theme.CheckAndroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CheckAndroidTheme {
-                val homeViewModel: HomeScreenViewModel = viewModel<HomeScreenViewModel>()
+                val homeViewModel: PoolScreenViewModel = viewModel<PoolScreenViewModel>()
                 val poolState: PoolState by homeViewModel.state.collectAsState()
 
                 val navController = rememberNavController()

@@ -1,4 +1,4 @@
-package de.check.check_android.pages.home.presentation
+package de.check.check_android.pages.pools.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import de.check.check_android.pages.home.data.PoolState
+import de.check.check_android.pages.pools.data.PoolState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

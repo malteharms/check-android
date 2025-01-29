@@ -1,4 +1,4 @@
-package de.check.check_android.pages.home.presentation
+package de.check.check_android.pages.pools.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import de.check.check_android.pages.home.data.PoolOption
+import de.check.check_android.pages.pools.data.PoolOption
 
 
 @Composable

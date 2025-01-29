@@ -1,4 +1,4 @@
-package de.check.check_android.pages.home.domain
+package de.check.check_android.pages.pools.domain
 
 import de.check.database.tables.Pool
 

@@ -1,4 +1,4 @@
-package de.check.check_android.pages.home.presentation
+package de.check.check_android.pages.pools.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.check.check_android.DefaultAppBar
-import de.check.check_android.pages.home.data.PoolState
-import de.check.check_android.pages.home.domain.PoolEvent
+import de.check.check_android.pages.pools.data.PoolState
+import de.check.check_android.pages.pools.domain.PoolEvent
 import de.check.database.tables.Pool
 
 
