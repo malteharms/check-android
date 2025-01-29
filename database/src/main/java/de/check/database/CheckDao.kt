@@ -1,6 +1,7 @@
 package de.check.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -15,8 +16,8 @@ interface CheckDao {
     @Update
     fun updatePool(pool: Pool)
 
-     @Query("DELETE FROM pools WHERE id = :id")
-     fun removePool(id: Int)
+     @Delete
+     fun removePool(pool: Pool)
 
      @Query("SELECT * FROM pools")
      fun getPools(): List<Pool>

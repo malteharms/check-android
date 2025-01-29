@@ -15,13 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import de.check.check_android.pages.home.data.HomeState
+import de.check.check_android.pages.home.data.PoolState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPoolBottomSheet(
     modifier: Modifier,
-    state: HomeState,
+    state: PoolState,
     onDismissRequest: () -> Unit,
     onValueChange: (String) -> Unit,
     onSubmit: () -> Unit

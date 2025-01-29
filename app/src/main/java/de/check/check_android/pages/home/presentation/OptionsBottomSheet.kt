@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.check.check_android.pages.home.data.PoolOption
 import de.check.check_android.pages.home.data.PoolOptionType
-import de.check.check_android.pages.home.domain.HomeEvent
+import de.check.check_android.pages.home.domain.PoolEvent
 import de.check.database.tables.Pool
 
 
@@ -32,42 +32,17 @@ import de.check.database.tables.Pool
 fun OptionsBottomSheet(
     pool: Pool,
     onDismissRequest: () -> Unit,
-    onEvent: (HomeEvent) -> Unit
+    onEvent: (PoolEvent) -> Unit
 ) {
-    val scope = rememberCoroutineScope()
-    val snackBarHostState = remember { SnackbarHostState() }
-
     val options: Map<PoolOptionType, List<PoolOption>> = mapOf(
-        PoolOptionType.NORMAL to listOf(
-            PoolOption(
-                name = "Favorite",
-                icon = Icons.Default.FavoriteBorder,
-                onClick = {  },
-            ),
-            PoolOption(
-                name = "Settings",
-                icon = Icons.Default.Settings,
-                onClick = {  }
-            ),
-            PoolOption(
-                name = "Share",
-                icon = Icons.Default.Share,
-                onClick = { }
-            )
-        ),
+        PoolOptionType.NORMAL to listOf(),
 
         PoolOptionType.DANGER to listOf(
             PoolOption(
                 name = "Delete",
                 icon = Icons.Default.Delete,
                 danger = true,
-                onClick = {  }
-            ),
-            PoolOption(
-                name = "Archive",
-                icon = Icons.Default.Lock,
-                danger = true,
-                onClick = {  }
+                onClick = { onEvent(PoolEvent.RemovePool) }
             )
         )
     )

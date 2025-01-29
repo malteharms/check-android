@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import de.check.check_android.pages.home.data.HomeState
+import de.check.check_android.pages.home.data.PoolState
 import de.check.check_android.pages.home.presentation.HomeScreen
 import de.check.check_android.pages.home.presentation.HomeScreenViewModel
 import de.check.check_android.ui.theme.CheckAndroidTheme
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CheckAndroidTheme {
                 val homeViewModel: HomeScreenViewModel = viewModel<HomeScreenViewModel>()
-                val homeState: HomeState by homeViewModel.state.collectAsState()
+                val poolState: PoolState by homeViewModel.state.collectAsState()
 
                 val navController = rememberNavController()
 
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     composable<HomeScreen> {
                         HomeScreen(
                             onEvent = homeViewModel::onEvent,
-                            state = homeState
+                            state = poolState
                         )
                     }
                 }

@@ -1,14 +1,18 @@
 package de.check.check_android.pages.home.domain
 
-sealed interface HomeEvent {
+import de.check.database.tables.Pool
 
-    data object OpenSheetAddPool : HomeEvent
-    data object CloseSheetAddPool : HomeEvent
+sealed interface PoolEvent {
 
-    data class SetNewPoolTitle(val title: String): HomeEvent
+    data object OpenSheetAddPool: PoolEvent
+    data object CloseSheetAddPool: PoolEvent
 
-    data object AddNewPool : HomeEvent
-    data class OpenPool(val id: Int) : HomeEvent
-    data class RemovePool(val id: Int) : HomeEvent
+    data class SetNewPoolTitle(val title: String): PoolEvent
 
+    data object AddNewPool: PoolEvent
+    data class OpenPool(val pool: Pool): PoolEvent
+    data object RemovePool: PoolEvent
+
+    data class OpenSheetOptions(val pool: Pool): PoolEvent
+    data object CloseSheetOptions: PoolEvent
 }

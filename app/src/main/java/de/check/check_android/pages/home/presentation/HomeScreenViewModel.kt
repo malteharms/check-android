@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.check.check_android.CheckApp
-import de.check.check_android.pages.home.data.HomeState
-import de.check.check_android.pages.home.domain.HomeEvent
+import de.check.check_android.pages.home.data.PoolState
+import de.check.check_android.pages.home.domain.PoolEvent
 import de.check.core.getTimestampFromDate
 import de.check.database.CheckDao
 import de.check.database.tables.Pool
@@ -25,19 +25,19 @@ class HomeScreenViewModel(
     }
 
     private val _state = MutableStateFlow(
-        HomeState(pools = dao.getPools())
+        PoolState(pools = dao.getPools())
     )
 
     val state = _state.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        HomeState(pools = dao.getPools())
+        PoolState(pools = dao.getPools())
     )
 
-    fun onEvent(event: HomeEvent) {
+    fun onEvent(event: PoolEvent) {
         when (event) {
 
-            HomeEvent.AddNewPool -> {
+            PoolEvent.AddNewPool -> {
                 val newPool = Pool(
                     title = _state.value.newPoolTitle,
                     creator = 0,    // TODO replace with account ID
@@ -55,35 +55,57 @@ class HomeScreenViewModel(
                 }
             }
 
-            is HomeEvent.OpenPool -> {
+            is PoolEvent.OpenPool -> {
                 TODO()
             }
 
-            is HomeEvent.RemovePool -> {
-                Log.i(TAG,"Removing pool with ID ${event.id} from database")
+            is PoolEvent.RemovePool -> {
+                val poolToDelete = _state.value.selectedPool
+                if (poolToDelete == null) {
+                    Log.e(TAG, "Internal Error: No pool selected, will not remove pool from DB.")
+                    return
+                }
+
+                Log.i(TAG,"Removing pool ${poolToDelete.title} from database.")
                 viewModelScope.launch {
-                    dao.removePool(event.id)        // Database update
+                    dao.removePool(poolToDelete)
                     _state.update { it.copy(
-                        pools = dao.getPools()      // Update pools, title reset not necessary
+                        pools = dao.getPools(),
+                        isOptionsSheetOpen = false,
+                        selectedPool = null
                     ) }
                 }
             }
 
-            HomeEvent.OpenSheetAddPool -> {
+            PoolEvent.OpenSheetAddPool -> {
                 _state.update { it.copy(
                     isAddingNewPool = true
                 ) }
             }
 
-            HomeEvent.CloseSheetAddPool -> {
+            PoolEvent.CloseSheetAddPool -> {
                 _state.update { it.copy(
                     isAddingNewPool = false
                 ) }
             }
 
-            is HomeEvent.SetNewPoolTitle -> {
+            is PoolEvent.SetNewPoolTitle -> {
                 _state.update { it.copy(
                     newPoolTitle = event.title
+                ) }
+            }
+
+            is PoolEvent.OpenSheetOptions -> {
+                _state.update { it.copy(
+                    isOptionsSheetOpen = true,
+                    selectedPool = event.pool
+                ) }
+            }
+
+            PoolEvent.CloseSheetOptions -> {
+                _state.update { it.copy(
+                    isOptionsSheetOpen = false,
+                    selectedPool = null
                 ) }
             }
 

@@ -28,7 +28,9 @@ import de.check.database.tables.Pool
 
 @Composable
 fun PoolEntry(
-    pool: Pool
+    pool: Pool,
+    onClick: () -> Unit,
+    onOptionsOpen: () -> Unit
 ) {
     // TODO receive PoolID and fetch pool from database
 
@@ -54,7 +56,7 @@ fun PoolEntry(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = pool.title, fontWeight = FontWeight.Bold)
-                IconButton(onClick = {}, modifier = Modifier.size(18.dp)) {
+                IconButton(onClick = { onOptionsOpen() }, modifier = Modifier.size(18.dp)) {
                     Icon(Icons.Default.MoreVert, contentDescription = null)
                 }
             }

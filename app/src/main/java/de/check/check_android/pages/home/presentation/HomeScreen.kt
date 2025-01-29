@@ -11,19 +11,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.check.check_android.DefaultAppBar
-import de.check.check_android.pages.home.data.HomeState
-import de.check.check_android.pages.home.domain.HomeEvent
+import de.check.check_android.pages.home.data.PoolState
+import de.check.check_android.pages.home.domain.PoolEvent
 import de.check.database.tables.Pool
 
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun HomeScreen(
-    state: HomeState,
-    onEvent: (HomeEvent) -> Unit
+    state: PoolState,
+    onEvent: (PoolEvent) -> Unit
 ) {
     Scaffold (
-        floatingActionButton = { OpenSheetAddPool { onEvent(HomeEvent.OpenSheetAddPool) } },
+        floatingActionButton = { OpenSheetAddPool { onEvent(PoolEvent.OpenSheetAddPool) } },
         topBar = { DefaultAppBar() }
     ){ innerPadding ->
         FlowRow(
@@ -35,18 +35,32 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             state.pools.forEach { pool: Pool ->
-                PoolEntry(pool)
+                PoolEntry(
+                    pool = pool,
+                    onClick = { /* TODO navigate to details page */},
+                    onOptionsOpen = { onEvent(PoolEvent.OpenSheetOptions(pool)) }
+                )
             }
         }
 
         if (state.isAddingNewPool) {
             AddPoolBottomSheet(
                 state = state,
-                onDismissRequest = { onEvent(HomeEvent.CloseSheetAddPool) },
-                onValueChange = { title -> onEvent(HomeEvent.SetNewPoolTitle(title)) },
-                onSubmit = { onEvent(HomeEvent.AddNewPool) },
+                onDismissRequest = { onEvent(PoolEvent.CloseSheetAddPool) },
+                onValueChange = { title -> onEvent(PoolEvent.SetNewPoolTitle(title)) },
+                onSubmit = { onEvent(PoolEvent.AddNewPool) },
                 modifier = Modifier.fillMaxWidth(),
             )
+        }
+
+        if (state.isOptionsSheetOpen) {
+            state.selectedPool?.let {
+                OptionsBottomSheet(
+                    pool = it,
+                    onDismissRequest = { onEvent(PoolEvent.CloseSheetOptions) },
+                    onEvent = onEvent
+                )
+            }
         }
     }
 }
